@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <h1>Results are as below:</h1>
+    <br />Bill Amount: @ViewBag.BillAmount
+    <br />Discount: @ViewBag.Discount
+    <br />Net Bill Amount: @ViewBag.NetBillAmount
+    <br />&nbsp;
+</div>
+
+<h2>Approach 1</h2>
+@{
+    Html.BeginForm("Calculate", "FormsDemo", FormMethod.Post);
+}
+<p>Product Name: @Html.TextBox("txtProductName")</p>
+<p>Product Cost: @Html.TextBox("txtCost")</p>
+<p>Quantity: @Html.TextBox("txtQty")</p>
+<input type="submit" value="Submit1" />
+@{ 
+    Html.EndForm();
+}
+
+<h2>Approach 2</h2>
+@{ 
+    Html.BeginForm("Index", "FormsDemo");
+    @:Product Name: @Html.TextBox("txtProductName")<br />
+    @:Product Cost: @Html.TextBox("txtCost")<br />
+    @:Quantity: @Html.TextBox("txtQty")<br />
+    <input type="submit" value="Submit2" />
+    Html.EndForm();
+}
+
+<h2>Approach 3</h2>
+@using (Html.BeginForm("index", "FormsDemo"))
+{
+    @:Product Name: @Html.TextBox("txtProductName")<br />
+    @:Product Cost: @Html.TextBox("txtCost")<br />
+    @:Quantity: @Html.TextBox("txtQty")<br />
+    <input type="submit" value="Submit3" />
+}
