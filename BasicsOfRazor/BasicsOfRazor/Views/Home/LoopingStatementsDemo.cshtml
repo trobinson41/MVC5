@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "LoopingStatementsDemo";
+}
+
+<h2>LoopingStatementsDemo</h2>
+
+@for (var j = 10; j < 21; j++)
+{
+    <p>Line @j</p>
+}
+<hr />
+
+<ul>
+    @foreach (var x in Request.ServerVariables)
+    {
+        <li>@x</li>
+    }
+</ul>
+<hr />
+
+@{ 
+    var i = 0;
+    while (i < 5)
+    {
+        i += 1;
+        <p>Line @i</p>
+    }
+}
+<hr />
+
+@{ 
+    string[] members = { "Chris", "James", "Nate", "Nick" };
+    i = Array.IndexOf(members, "Nate") + 1;
+    int len = members.Length;
+    string s = members[2 - 1];
+}
+@foreach (var person in members)
+{
+    <p>@person</p>
+}
+<p>The number of names in Members are @len</p>
+<p>The person at position 2 is @s</p>
+<p>Nate is in position @i</p>

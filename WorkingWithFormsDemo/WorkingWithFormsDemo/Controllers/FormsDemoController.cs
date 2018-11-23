@@ -14,23 +14,23 @@ namespace WorkingWithFormsDemo.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(string txtProductName, string txtCost, string txtQty)
-        {
-            string ProductName = txtProductName;
-            int Cost = Convert.ToInt32(txtCost);
-            int Quantity = Convert.ToInt32(txtQty);
+        //[HttpPost]
+        //public ActionResult Index(string txtProductName, string txtCost, string txtQty)
+        //{
+        //    string ProductName = txtProductName;
+        //    int Cost = Convert.ToInt32(txtCost);
+        //    int Quantity = Convert.ToInt32(txtQty);
 
-            double BillAmount = Cost * Quantity;
-            double Discount = BillAmount * 10 / 100;
-            double NetBillAmount = BillAmount - Discount;
+        //    double BillAmount = Cost * Quantity;
+        //    double Discount = BillAmount * 10 / 100;
+        //    double NetBillAmount = BillAmount - Discount;
 
-            ViewBag.BillAmount = BillAmount;
-            ViewBag.Discount = Discount;
-            ViewBag.NetBillAmount = NetBillAmount;
+        //    ViewBag.BillAmount = BillAmount;
+        //    ViewBag.Discount = Discount;
+        //    ViewBag.NetBillAmount = NetBillAmount;
 
-            return View();
-        }
+        //    return View();
+        //}
 
         //[HttpPost]
         //public ActionResult Index(FormCollection collection)
@@ -49,6 +49,32 @@ namespace WorkingWithFormsDemo.Controllers
 
         //    return View();
         //}
+
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
+        {
+            int Cost = Convert.ToInt32(collection["Cost"].ToString());
+            int Quantity = Convert.ToInt32(collection["Quantity"].ToString());
+            double BillAmount = Cost * Quantity;
+
+            var strArray = collection["IsPartOfDeal"];
+            char[] delimiterChars = { ',' };
+            string[] checkedValue = strArray.Split(delimiterChars);
+            var returnValue = checkedValue.Length > 1;
+
+            double Discount = returnValue ? BillAmount * 10 / 100 : BillAmount * 2 / 100;
+
+            double NetBillAmount = BillAmount - Discount;
+
+            ViewBag.Cost = Cost;
+            ViewBag.Quantity = Quantity;
+            
+            ViewBag.BillAmount = BillAmount;
+            ViewBag.Discount = Discount;
+            ViewBag.NetBillAmount = NetBillAmount;
+
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Calculate()

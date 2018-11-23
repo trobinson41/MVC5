@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@{ var Message = "Welcome to Razor"; }
+@{ string strMessage = "Welcome to Razor"; }
+
+<h1>Value of Message is @Message</h1>
+<h1>Value of Message is @strMessage</h1>
+
+@{ 
+    var Message2 = "Welcome to Learning Basics of Razor";
+    var weekDay = DateTime.Now.DayOfWeek;
+    var Message3 = Message2 + ". Today is " + weekDay.ToString();
+    var test = new FileInfo("test.txt");
+    var list = new List<string>();
+    list.Add("One");
+    list.Add("Two");
+    list.Add("Three");
+
+    foreach (var item in list)
+    {
+        <h2>@item</h2>
+    }
+
+    <h1>test.txt exists: @test.Exists</h1>
+    <h1>Value of Message3 is @Message3</h1>
+}
+
+<h1>Value of Message3 is @Message3</h1>
+
+<table border="1">
+    <tr>
+        <th>Requested URL</th>
+        <th>Relative Path</th>
+        <th>Full Path</th>
+        <th>HTTP Request Type</th>
+    </tr>
+    <tr>
+        <td>@Request.Url</td>
+        <td>@Request.FilePath</td>
+        <td>@Request.MapPath(Request.FilePath)</td>
+        <td>@Request.RequestType</td>
+    </tr>
+</table>
+<br />
+
+<table border="1">
+    <tr>
+        <th width="100px">Name</th>
+        <th width="100px">Value</th>
+    </tr>
+    <tr>
+        <td>Day</td>
+        <td>@DateTime.Now.DayOfWeek</td>
+    </tr>
+    <tr>
+        <td>Hour</td>
+        <td>@DateTime.Now.Hour</td>
+    </tr>
+    <tr>
+        <td>Minute</td>
+        <td>@DateTime.Now.Minute</td>
+    </tr>
+</table>
