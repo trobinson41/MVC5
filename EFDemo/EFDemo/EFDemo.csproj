@@ -152,9 +152,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDALController.cs" />
+    <Compile Include="Controllers\GenericBODemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\GenericBO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +243,14 @@
     <Content Include="Views\Employee\Delete.cshtml" />
     <Content Include="Views\EmployeeDAL\Create.cshtml" />
     <Content Include="Views\EmployeeDAL\Delete.cshtml" />
+    <Content Include="Views\EmployeeDAL\Index.cshtml" />
+    <Content Include="Views\EmployeeDAL\Details.cshtml" />
+    <Content Include="Views\EmployeeDAL\Edit.cshtml" />
+    <Content Include="Views\GenericBODemo\Index.cshtml" />
+    <Content Include="Views\GenericBODemo\Details.cshtml" />
+    <Content Include="Views\GenericBODemo\Create.cshtml" />
+    <Content Include="Views\GenericBODemo\Edit.cshtml" />
+    <Content Include="Views\GenericBODemo\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

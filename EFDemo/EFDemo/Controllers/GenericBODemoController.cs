@@ -8,38 +8,33 @@ using System.Web.Mvc;
 
 namespace EFDemo.Controllers
 {
-    public class EmployeeDALController : Controller
+    public class GenericBODemoController : Controller
     {
-        EmployeeDAL objEmpBO = new EmployeeDAL();
-        DepartmentDAL objDeptBO = new DepartmentDAL();
+        GenericBO<Employee> obj = new GenericBO<Employee>();
+        GenericBO<Department> objDept = new GenericBO<Department>();
 
-        // GET: EmployeeDAL
         public ActionResult Index()
         {
-            var employees = objEmpBO.GetAllEmployees();
+            var employees = obj.GetAll();
             return View(employees.ToList());
         }
 
-        // GET: EmployeeDAL/Details/5
         public ActionResult Details(int id)
         {
-            Employee employee = objEmpBO.GetDetails(id);
+            var employee = obj.GetDetails(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
-
             return View(employee);
         }
 
-        // GET: EmployeeDAL/Create
         public ActionResult Create()
         {
-            ViewBag.DeptID = new SelectList(objDeptBO.GetAllDepartments(), "DeptID", "DeptName");
+            ViewBag.DeptID = new SelectList(objDept.GetAll(), "DeptID", "DeptName");
             return View();
         }
 
-        // POST: EmployeeDAL/Create
         [HttpPost]
         public ActionResult Create(Employee employee)
         {
@@ -47,10 +42,11 @@ namespace EFDemo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    objEmpBO.Insert(employee);
+                    obj.Insert(employee);
                     return RedirectToAction("Index");
                 }
-                ViewBag.DeptID = new SelectList(objDeptBO.GetAllDepartments(), "DeptID", "DeptName");
+
+                ViewBag.DeptID = new SelectList(objDept.GetAll(), "DeptID", "DeptName");
                 return View(employee);
             }
             catch
@@ -59,20 +55,18 @@ namespace EFDemo.Controllers
             }
         }
 
-        // GET: EmployeeDAL/Edit/5
         public ActionResult Edit(int id)
         {
-            Employee employee = objEmpBO.GetDetails(id);
+            Employee employee = obj.GetDetails(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.DeptID = new SelectList(objDeptBO.GetAllDepartments(), "DeptID", "DeptName");
+            ViewBag.DeptID = new SelectList(objDept.GetAll(), "DeptID", "DeptName");
             return View(employee);
         }
 
-        // POST: EmployeeDAL/Edit/5
         [HttpPost]
         public ActionResult Edit(Employee employee)
         {
@@ -80,11 +74,11 @@ namespace EFDemo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    objEmpBO.Update(employee);
+                    obj.Update(employee);
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.DeptID = new SelectList(objDeptBO.GetAllDepartments(), "DeptID", "DeptName", employee.DeptID);
+                ViewBag.DeptID = new SelectList(objDept.GetAll(), "DeptID", "DeptName");
                 return View(employee);
             }
             catch
@@ -93,24 +87,22 @@ namespace EFDemo.Controllers
             }
         }
 
-        // GET: EmployeeDAL/Delete/5
         public ActionResult Delete(int id)
         {
-            Employee employee = objEmpBO.GetDetails(id);
-            if(employee == null)
+            Employee employee = obj.GetDetails(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
             return View(employee);
         }
 
-        // POST: EmployeeDAL/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirm(int id)
         {
             try
             {
-                objEmpBO.Delete(id);
+                obj.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
